@@ -87,7 +87,6 @@ f1-laptimes/
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── f1_lap_times.html
-│   │   └── contact.html
 ├── manage.py
 ├── requirements.txt
 └── .gitignore
