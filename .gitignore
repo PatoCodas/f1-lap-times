@@ -1,0 +1,47 @@
+# Ignore the virtual environment directory
+venv/
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore Django migration files
+*.log
+*.pot
+*.pyc
+*.so
+*.zip
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.sqlite
+*.pdb
+*.egg-info
+*.egg
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+*.sublime-project
+*.sublime-workspace
+.idea/
+.vscode/
+.DS_Store
+.coverage
+.coverage.*
+.cache
+.tox/
+.env
+.env.*
+node_modules/
+dist/
+build/
+*.egg-info/
+*.eggs/
+*.pytest_cache/
+*.mypy_cache/
+*.pylint.d/
+*.ropeproject/
+*.ipynb_checkpoints/

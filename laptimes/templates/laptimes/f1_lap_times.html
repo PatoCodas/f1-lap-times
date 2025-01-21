@@ -1,0 +1,213 @@
+<!-- filepath: /c:/Users/migue/Desktop/estudos diversos/tempof1/f1-laptimes/laptimes/templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>F1 Lap Times</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .navbar, .footer {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .navbar a, .footer a {
+            color: #ffffff;
+        }
+        .card {
+            background-color: #ffffff;
+            border-color: #343a40;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body .form-control {
+            flex-grow: 1;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode .navbar, .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+        .dark-mode .btn-primary {
+            background-color: #3a3a3a;
+            border-color: #3a3a3a;
+        }
+        .dark-mode .btn-danger {
+            background-color: #b71c1c;
+            border-color: #b71c1c;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            background-color:rgb(143, 143, 143);
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        #loader {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 120px;
+            height: 120px;
+            margin: -76px 0 0 -76px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #343a40;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+    
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+    
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader" class="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">F1 Lap Times</a>
+            <button id="toggle-dark-mode" class="btn btn-secondary ms-auto">Toggle Dark Mode</button>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        {% if messages %}
+        <div class="row">
+            <div class="col-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row justify-content-center">
+            {% for track in tracks %}
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column p-4">
+                        <h5 class="card-title text-center">{{ track.name }}</h5>
+                        
+                        <form method="POST" class="mb-4 flex-grow-1">
+                            {% csrf_token %}
+                            <input type="hidden" name="track" value="{{ track.id }}">
+                            <div class="mb-4">
+                                <label for="time-{{ track.id }}" class="form-label">Lap Time</label>
+                                <input type="text" id="time-{{ track.id }}" name="time" class="form-control time-input" placeholder="MM:SS.mmm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="date-{{ track.id }}" class="form-label">Date</label>
+                                <input type="date" id="date-{{ track.id }}" name="date" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new lap time"><i class="fas fa-plus"></i> Add Lap Time</button>
+                        </form>
+    
+                        <div class="mt-4">
+                            {% for lap_time in track.lap_times.all %}
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>{{ lap_time.date }} - {{ lap_time.time }}</span>
+                                <form method="POST" action="{% url 'delete_lap_time' lap_time.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this lap time"><i class="fas fa-trash"></i> Delete</button>
+                                </form>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container p-4">
+            <p>That was such a good idea!!!</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var timeInputs = document.querySelectorAll('.time-input');
+            timeInputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^0-9:.]/g, '').replace(/(\..*)\./g, '$1');
+                    if (this.value.length === 2 || this.value.length === 5) {
+                        this.value += ':';
+                    }
+                });
+            });
+        });
+        document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
