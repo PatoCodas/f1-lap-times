@@ -2,7 +2,7 @@
 
 ## Description
 
-The **F1 Lap Times** project is a web application developed in Django to record and visualize lap times for different Formula 1 tracks. It allows adding, viewing, and deleting lap times, and offers a dark mode for a better viewing experience.
+The **F1 Lap Times** project is a web application developed in Django for studying this technology. It is designed to record and visualize lap times for different Formula 1 tracks. It allows adding, viewing, and deleting lap times.
 
 ## Features
 
