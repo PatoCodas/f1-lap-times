@@ -1,67 +1,71 @@
 # F1 Lap Times
 
-## Descrição
+![F1 Lap Times](https://your-image-url.com/logo.png)
 
-O projeto **F1 Lap Times** é uma aplicação web desenvolvida em Django feita para estudos dessa tecnologia, ela serve para registrar e visualizar os tempos de volta de diferentes pistas de Fórmula 1. Ele permite adicionar, visualizar e deletar tempos de volta.
+## Description
 
-## Funcionalidades
+The **F1 Lap Times** project is a web application developed in Django to record and visualize lap times for different Formula 1 tracks. It allows adding, viewing, and deleting lap times, and offers a dark mode for a better viewing experience.
 
-- Adicionar tempos de volta para diferentes pistas.
-- Visualizar os tempos de volta registrados.
-- Deletar tempos de volta.
-- Alternar entre modo claro e modo noturno.
+## Features
 
-## Dependências
+- Add lap times for different tracks.
+- View recorded lap times.
+- Delete lap times.
+- Toggle between light and dark mode.
+- Image carousel on the homepage.
+- Contact form.
 
-Para rodar este projeto, você precisará das seguintes dependências:
+## Dependencies
+
+To run this project, you will need the following dependencies:
 
 - Python 3.6+
 - Django 3.2+
-- Bootstrap 5.1.3
-- Font Awesome 5.15.4
+- djangorestframework 3.12.4
+- Pillow 8.4.0
 
-## Instalação
+## Installation
 
-1. Clone o repositório:
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/PatoCodas/f1-lap-times.git
     cd f1-lap-times
     ```
 
-2. Crie um ambiente virtual e ative-o:
+2. Create a virtual environment and activate it:
 
     ```bash
     python -m venv venv
-    source venv/bin/activate  # No Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-3. Instale as dependências:
+3. Install the dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-4. Realize as migrações do banco de dados:
+4. Apply the database migrations:
 
     ```bash
     python manage.py makemigrations
     python manage.py migrate
     ```
 
-5. Inicie o servidor de desenvolvimento:
+5. Start the development server:
 
     ```bash
     python manage.py runserver
     ```
 
-6. Acesse a aplicação no navegador:
+6. Access the application in your browser:
 
     ```text
     http://127.0.0.1:8000/
     ```
 
-## Estrutura do Projeto
+## Project Structure
 
 ```filetree
 f1-laptimes/
@@ -90,13 +94,13 @@ f1-laptimes/
 │   │   └── contact.html
 ├── manage.py
 ├── requirements.txt
-└── venv/
+└── .gitignore
 ```
 
-## Contato
-Para mais informações, entre em contato:
+# Contact
 
 Email: miguelsilvaug@gmail.com
 GitHub: PatoCodas
 
-## Feito com ❤️ por PatoCodas
+
+# Made with ❤️ by PatoCodas
